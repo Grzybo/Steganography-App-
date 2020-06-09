@@ -1,0 +1,3 @@
+- funkcje edukacyjne 
+- możliwość zmniejszenia obrazu jak jest za duży 
+- zapisanie wymiarów obrazu na początku obrazu aby na tej podstawie odzyskać obraz 
