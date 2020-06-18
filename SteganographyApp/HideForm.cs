@@ -47,6 +47,8 @@ namespace SteganographyApp
         // inicjacja ukrywania obazu 
         private void BtnHide_Click(object sender, EventArgs e)
         {
+            if (mainImage == null || secretImage == null) { return; }
+            
             if (mainImage.Width < secretImage.Width || mainImage.Height < secretImage.Height)
             {
                 MessageBox.Show("Obraz do ukrycia musi być mniejszy od bazowego.");
@@ -267,6 +269,17 @@ namespace SteganographyApp
             catch { bitmaps.Remove(cbBase.SelectedItem.ToString()); }
         }
 
+        private void BtnReset_Click(object sender, EventArgs e)
+        {
+            PbMainImage.Image = null;
+            PbHiddenImage.Image = null;
+            PbResult.Image = null;
+            step = x = y = 0;
+            tbDesc.Text = lStep.Text = default;
+            tbMainImageSize.Text = tbSecretImageSize.Text = "";
+            cbBase.Enabled = cbHide.Enabled = BtnHide.Enabled = true;
+            mainImage = secretImage = resultImage = null; 
+        }
 
         private void btnSave_Click(object sender, EventArgs e)
         {

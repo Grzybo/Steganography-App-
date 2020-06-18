@@ -103,8 +103,8 @@ namespace SteganographyApp
         // odczytywanie obrazu do konca 
         private void btnSkip_Click(object sender, EventArgs e)
         {
-            for (int i = 1; i < secretWidth; ++i)
-                for (int j = 1; j < secretHeight; ++j)
+            for (int i = 0; i < secretWidth; ++i)
+                for (int j = 0; j < secretHeight; ++j)
                 {
 
                     string tempR1 = Convert.ToString(mainImage.GetPixel(i, j).R, 2).PadLeft(8, '0');
