@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.loadToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -53,19 +54,21 @@
             // 
             // fileToolStripMenuItem
             // 
+            this.fileToolStripMenuItem.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.loadToolStripMenuItem});
             this.fileToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(73, 25);
             this.fileToolStripMenuItem.Text = "Otwórz";
+            this.fileToolStripMenuItem.Click += new System.EventHandler(this.fileToolStripMenuItem_Click);
             // 
             // loadToolStripMenuItem
             // 
             this.loadToolStripMenuItem.BackColor = System.Drawing.Color.DimGray;
             this.loadToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.loadToolStripMenuItem.Name = "loadToolStripMenuItem";
-            this.loadToolStripMenuItem.Size = new System.Drawing.Size(122, 26);
+            this.loadToolStripMenuItem.Size = new System.Drawing.Size(180, 26);
             this.loadToolStripMenuItem.Text = "Obraz";
             this.loadToolStripMenuItem.Click += new System.EventHandler(this.loadToolStripMenuItem_Click);
             // 
@@ -90,6 +93,7 @@
             // pContainer
             // 
             this.pContainer.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pContainer.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.pContainer.Location = new System.Drawing.Point(0, 29);
             this.pContainer.Name = "pContainer";
             this.pContainer.Size = new System.Drawing.Size(899, 301);
@@ -103,6 +107,7 @@
             this.ClientSize = new System.Drawing.Size(899, 330);
             this.Controls.Add(this.pContainer);
             this.Controls.Add(this.menuStrip1);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
             this.Text = "Steganoapka";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

@@ -22,51 +22,38 @@ namespace SteganographyApp
         private Dictionary<string, Bitmap> bitmaps;
 
 
-        public RecoverForm(Dictionary<string, Bitmap> bitmaps)
+        public void Init(Dictionary<string, Bitmap> bitmaps)
         {
             InitializeComponent();
             this.bitmaps = bitmaps;
             foreach (string name in bitmaps.Keys)
                 cbBase.Items.Add(name);
-            step = x = y = 0; 
+            step = x = y = 0;
+        }
+
+        public RecoverForm(Dictionary<string, Bitmap> bitmaps)
+        {
+            Init(bitmaps);
         }
 
         public RecoverForm(Bitmap bmp, Dictionary<string, Bitmap> bitmaps)
         {
-            InitializeComponent();
+            Init(bitmaps);
             mainImage = bmp;
             PbMainImage.Image = bmp;
-            this.bitmaps = bitmaps;
-
-            foreach (string name in bitmaps.Keys)
-                cbBase.Items.Add(name);
-            step = 0;
         }
 
         private void PbMainImage_Click(object sender, EventArgs e)
         {
-            mainImage = LoadImage(PbMainImage);
-
+            mainImage = Tools.LoadImage(PbMainImage);
         }
-        private Bitmap LoadImage(PictureBox pb)
-        {
-            OpenFileDialog dialog = new OpenFileDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                Bitmap bmp = new Bitmap(dialog.FileName);
-                pb.Image = bmp;
-                return bmp;
-            }
-            return null;
-        }
-
+     
         private void BtnHide_Click(object sender, EventArgs e)
         {
             if (mainImage == null) { return; }
             btnBack.Enabled = btnGo.Enabled = btnSkip.Enabled = true;
 
-
-            BtnRecover.Enabled = false; 
+            BtnRecover.Enabled = cbBase.Enabled =  false; 
             SecretSize();
             step++;
             lStep.Text = "Krok " + step;
@@ -78,6 +65,7 @@ namespace SteganographyApp
 
         // ################################################################################################################## 
 
+        // odczytywanie rozmiaru obrazu 
         private void SecretSize() 
         {
             string secretSize = "" + Convert.ToString(mainImage.GetPixel(0, 0).R, 2).PadLeft(8, '0').Substring(4, 4) +
@@ -94,42 +82,29 @@ namespace SteganographyApp
             PbRecovered.Image = resultImage;
         }
 
-        private void PbRecovered_Click(object sender, EventArgs e)
-        {
-            Save();
-        }
 
+        // metoda obsługująca wybierani obrazu z combo boxa 
         private void cbBase_SelectedIndexChanged(object sender, EventArgs e)
         {
-            mainImage = bitmaps[cbBase.SelectedItem.ToString()];
-            PbMainImage.Image = mainImage;
+            try
+            {
+                mainImage = bitmaps[cbBase.SelectedItem.ToString()];
+                PbMainImage.Image = mainImage;
+            }
+            catch { bitmaps.Remove(cbBase.SelectedItem.ToString()); }
         }
+
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Save();
+            Tools.SaveImage(PbRecovered);
         }
-
-        private void Save()
-        {
-            SaveFileDialog dialog = new SaveFileDialog();
-            dialog.Filter = "Image Files (*.png;*.jpg)|*.png;*.jpg";
-            dialog.FileName = "Image";
-
-            if (dialog.ShowDialog() == DialogResult.OK)
-            {
-                PbRecovered.Image.Save(dialog.FileName);
-            }
-        }
-
+        
+        // odczytywanie obrazu do konca 
         private void btnSkip_Click(object sender, EventArgs e)
         {
-            //for (int i = 0; i < resultImage.Width; ++i)
-                //for (int j = 0; j < resultImage.Height; ++j)
-                    //resultImage.SetPixel(i, j, mainImage.GetPixel(i, j));
-
-            for (int i = 0; i < secretWidth; ++i)
-                for (int j = 0; j < secretHeight; ++j)
+            for (int i = 1; i < secretWidth; ++i)
+                for (int j = 1; j < secretHeight; ++j)
                 {
 
                     string tempR1 = Convert.ToString(mainImage.GetPixel(i, j).R, 2).PadLeft(8, '0');
@@ -157,6 +132,8 @@ namespace SteganographyApp
             lStep.Text = "Krok " + step++;
         }
 
+
+        //odczytywanie obrazu po jednym piksesu
         private void btnGo_Click(object sender, EventArgs e)
         {
 
@@ -190,6 +167,8 @@ namespace SteganographyApp
             
         }
 
+
+        // piksel do tylu
         private void btnBack_Click(object sender, EventArgs e)
         {
             if (x == 0 && y == 0) { return; }
@@ -205,6 +184,7 @@ namespace SteganographyApp
             ShowRGBvalues();
         }
 
+        // wypisywanie obecnego piksela 
         private void ShowRGBvalues()
         {
             tbDesc.Text = "Pixel (" + x + ", " + y + " )";
@@ -216,11 +196,6 @@ namespace SteganographyApp
                                 "Odtworzony: R(" + Convert.ToString(resultImage.GetPixel(x, y).R, 2).PadLeft(8, '0')
                                 + ") G(" + Convert.ToString(resultImage.GetPixel(x, y).G, 2).PadLeft(8, '0')
                                 + ") B(" + Convert.ToString(resultImage.GetPixel(x, y).B, 2).PadLeft(8, '0') + ")");
-        }
-
-        private void RecoverForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

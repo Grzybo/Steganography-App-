@@ -20,10 +20,7 @@ namespace SteganographyApp
             bitmaps = new Dictionary<string, Bitmap>();
         }
 
-     
-
-      
-
+        
         private void loadToolStripMenuItem_Click(object sender, EventArgs e)
         {
             odzyskiwanieToolStripMenuItem.Enabled = true;
@@ -31,18 +28,21 @@ namespace SteganographyApp
 
             if (bitmaps.Count < 10)
             {
+                
                 OpenFileDialog dialog = new OpenFileDialog();
                 if (dialog.ShowDialog() == DialogResult.OK)
                 {
                     Bitmap bmp = new Bitmap(dialog.FileName);
                     bitmaps.Add(dialog.SafeFileName, bmp);
-                    PictureForm pf = new PictureForm(bmp) { TopLevel = false, Text = dialog.SafeFileName };
+                    PictureForm pf = new PictureForm(bmp, bitmaps) { TopLevel = false, Text = dialog.SafeFileName };
                     pContainer.Controls.Add(pf);
                     pf.Show();
                 }
             }
             else { MessageBox.Show("Za dużo otwartych obrazów."); }
-            
+
+            fileToolStripMenuItem.ForeColor = System.Drawing.Color.White;
+
         }
 
         private void ukrywanieToolStripMenuItem_Click(object sender, EventArgs e)
@@ -57,6 +57,11 @@ namespace SteganographyApp
             RecoverForm form = new RecoverForm(bitmaps) { TopLevel = false, TopMost = true };
             pContainer.Controls.Add(form);
             form.Show();
+        }
+
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            fileToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
         }
     }
 }

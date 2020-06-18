@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HideForm));
             this.PbMainImage = new System.Windows.Forms.PictureBox();
             this.PbHiddenImage = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
@@ -67,7 +68,6 @@
             this.PbMainImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PbMainImage.TabIndex = 0;
             this.PbMainImage.TabStop = false;
-            this.PbMainImage.Click += new System.EventHandler(this.PbMainImage_Click);
             // 
             // PbHiddenImage
             // 
@@ -82,7 +82,6 @@
             this.PbHiddenImage.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PbHiddenImage.TabIndex = 2;
             this.PbHiddenImage.TabStop = false;
-            this.PbHiddenImage.Click += new System.EventHandler(this.PbHiddenImage_Click);
             // 
             // label1
             // 
@@ -357,6 +356,7 @@
             this.Controls.Add(this.PbHiddenImage);
             this.Controls.Add(this.PbMainImage);
             this.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "HideForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Steganography by Grzybo";

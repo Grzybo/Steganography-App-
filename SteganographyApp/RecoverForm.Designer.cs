@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(RecoverForm));
             this.PbMainImage = new System.Windows.Forms.PictureBox();
             this.PbRecovered = new System.Windows.Forms.PictureBox();
             this.cbBase = new System.Windows.Forms.ComboBox();
@@ -70,7 +71,6 @@
             this.PbRecovered.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.PbRecovered.TabIndex = 2;
             this.PbRecovered.TabStop = false;
-            this.PbRecovered.Click += new System.EventHandler(this.PbRecovered_Click);
             // 
             // cbBase
             // 
@@ -222,9 +222,9 @@
             this.Controls.Add(this.PbRecovered);
             this.Controls.Add(this.PbMainImage);
             this.ForeColor = System.Drawing.SystemColors.ButtonFace;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "RecoverForm";
             this.Text = "RecoverForm";
-            this.Load += new System.EventHandler(this.RecoverForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PbMainImage)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PbRecovered)).EndInit();
             this.ResumeLayout(false);

@@ -12,10 +12,19 @@ namespace SteganographyApp
 {
     public partial class PictureForm : Form
     {
-        public PictureForm(Bitmap bmp)
+
+        public Dictionary<string, Bitmap> bitmaps;
+
+        public PictureForm(Bitmap bmp, Dictionary<string, Bitmap> bitmaps)
         {
             InitializeComponent();
             pb.Image = bmp;
+            this.bitmaps = bitmaps;
+        }
+
+        private void PictureForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            bitmaps.Remove(this.Text); 
         }
     }
 }
